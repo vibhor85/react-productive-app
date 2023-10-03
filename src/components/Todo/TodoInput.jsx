@@ -14,19 +14,20 @@ const TodoInput = () => {
   };
   return (
     <Box
-      component='form'
-      p='20px'
-      sx={{ width: "45%", display: "flex" }}
-      onSubmit={AddTodoHandler}>
+      component="form"
+      p="20px"
+      sx={{ width: { sx: "100%", md: "45%" }, display: "flex" }}
+      onSubmit={AddTodoHandler}
+    >
       <TextField
-        id='outlined-basic'
-        label='Enter Something'
-        variant='outlined'
+        id="outlined-basic"
+        label="Enter Something"
+        variant="outlined"
         sx={{ width: "100%" }}
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <Button variant='contained' type='submit'>
+      <Button variant="contained" type="submit">
         Add
       </Button>
     </Box>

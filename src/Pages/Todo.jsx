@@ -11,12 +11,13 @@ const Todo = () => {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-      }}>
-      <Typography variant='h4' p='20px'>
+      }}
+    >
+      <Typography variant="h4" p="20px">
         Todo List
       </Typography>
       <TodoInput />
-      <TodoList />
+        <TodoList />
     </Box>
   );
 };

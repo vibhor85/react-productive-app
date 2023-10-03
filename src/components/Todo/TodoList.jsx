@@ -2,9 +2,13 @@ import { Box, List, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 import styled from "@emotion/styled";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
+import { rearrangeTodo, toggleCompletedTodo } from "../../slices/TodoSlice";
 
 const StyledStack = styled(Stack)({
   width: "100%",
+  minHeight: "200px",
 });
 const StyledTypo = styled(Typography)({
   textAlign: "center",
@@ -16,42 +20,90 @@ const StyledList = styled(List)({
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
-
+  const dispatch = useDispatch();
+  const onDragEnd = (result) => {
+    console.log(result);
+    const { destination, source, draggableId } = result;
+    if (!destination) return;
+    if (source.droppableId !== destination.droppableId) {
+      dispatch(toggleCompletedTodo(draggableId));
+      if (source.index !== destination.index) {
+        dispatch(
+          rearrangeTodo({
+            source: source.index,
+            destination: destination.index,
+            id: draggableId,
+          })
+        );
+      }
+    }
+    if (source.droppableId === destination.droppableId) {
+      dispatch(
+        rearrangeTodo({
+          source: source.index,
+          destination: destination.index,
+          id: draggableId,
+        })
+      );
+    }
+  };
   return (
-    <Box sx={{ width: "100%" }}>
-      <Stack direction='row'>
-        <StyledStack direction='column' width='100%'>
-          <StyledTypo variant='h5'>Task to Complete</StyledTypo>
-          <StyledList>
-            {todos.length > 0 &&
-              todos.map(
-                (todo) =>
-                  !todo.completed && <TodoItem key={todo.id} todo={todo} />
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Box sx={{ width: "100%" }}>
+        <Stack direction={{ xs: "column", md: "row" }}>
+          <StyledStack direction="column" width="100%">
+            <StyledTypo variant="h5">Task to Complete</StyledTypo>
+            <Droppable droppableId="dr-1">
+              {(provided) => (
+                <StyledList
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {todos.length > 0 &&
+                    todos.map(
+                      (todo, index) =>
+                        !todo.completed && (
+                          <TodoItem key={todo.id} todo={todo} index={index} />
+                        )
+                    )}
+                  {provided.placeholder}
+                </StyledList>
               )}
+            </Droppable>
             {todos.length === 0 && (
-              <Typography variant='h5' textAlign='center'>
+              <Typography variant="h5" textAlign="center">
                 No Task Present
               </Typography>
             )}
-          </StyledList>
-        </StyledStack>
-        <StyledStack direction='column'>
-          <StyledTypo variant='h5'>Completed Task</StyledTypo>
-          <StyledList>
-            {todos.length > 0 &&
-              todos.map(
-                (todo) =>
-                  todo.completed && <TodoItem key={todo.id} todo={todo} />
+          </StyledStack>
+          <StyledStack direction="column">
+            <StyledTypo variant="h5">Completed Task</StyledTypo>
+            <Droppable droppableId="dr-2">
+              {(provided) => (
+                <StyledList
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {todos.length > 0 &&
+                    todos.map(
+                      (todo, index) =>
+                        todo.completed && (
+                          <TodoItem key={todo.id} todo={todo} index={index} />
+                        )
+                    )}
+                  {provided.placeholder}
+                </StyledList>
               )}
+            </Droppable>
             {todos.length === 0 && (
-              <Typography variant='h5' textAlign='center'>
+              <Typography variant="h5" textAlign="center">
                 No Task Present
               </Typography>
             )}
-          </StyledList>
-        </StyledStack>
-      </Stack>
-    </Box>
+          </StyledStack>
+        </Stack>
+      </Box>
+    </DragDropContext>
   );
 };
 export default TodoList;

@@ -19,7 +19,7 @@ const StyledMenuItem = styled(MenuItem)({
 const Header = () => {
   const NavItems = [
     { text: "To-do", path: "/" },
-    { text: "To-do", path: "/" },
+    { text: "Calender", path: "/calender" },
   ];
 
   return (
