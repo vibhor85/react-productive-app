@@ -4,9 +4,12 @@ import App from "./App.jsx";
 import "./index.css";
 import { TodoStore } from "./store/TodoStore.js";
 import { Provider } from "react-redux";
+import { SchedulerStore } from "./store/SchedulerStore.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={TodoStore}>
-    <App />
+    <Provider store={SchedulerStore}>
+      <App />
+    </Provider>
   </Provider>
 );

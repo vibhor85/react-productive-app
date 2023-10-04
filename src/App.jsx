@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./Pages/Layout";
 import Todo from "./Pages/Todo";
-import Calender from "./Pages/Calender";
+import Schedule from "./Pages/Schedule";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index={true} element={<Todo />} />
-          <Route path="calender" element={<Calender />} />
+          <Route path="calender" element={<Schedule />} />
         </Route>
       </Routes>
     </BrowserRouter>

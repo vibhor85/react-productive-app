@@ -1,0 +1,10 @@
+.react-calendar {
+    width: 100% !important;
+    height: 91vh;
+}
+.react-calendar__month-view__days {
+    height: 78vh !important;
+}
+.react-calendar__tile abbr{
+    font-size: 18px !important;
+}

@@ -31,7 +31,6 @@ const TodoSlice = createSlice({
     },
     rearrangeTodo: (state, action) => {
       const todo = state.todos.filter((todo) => todo.id === action.payload.id);
-      console.log(todo);
       state.todos.splice(action.payload.source, 1);
       state.todos.splice(action.payload.destination, 0, todo[0]);
     },

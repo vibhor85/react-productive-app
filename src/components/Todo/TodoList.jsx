@@ -22,22 +22,12 @@ const TodoList = () => {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const onDragEnd = (result) => {
-    console.log(result);
     const { destination, source, draggableId } = result;
     if (!destination) return;
     if (source.droppableId !== destination.droppableId) {
       dispatch(toggleCompletedTodo(draggableId));
-      if (source.index !== destination.index) {
-        dispatch(
-          rearrangeTodo({
-            source: source.index,
-            destination: destination.index,
-            id: draggableId,
-          })
-        );
-      }
     }
-    if (source.droppableId === destination.droppableId) {
+    if (source.index !== destination.index) {
       dispatch(
         rearrangeTodo({
           source: source.index,
