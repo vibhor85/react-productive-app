@@ -19,7 +19,7 @@ const StyledList = styled(List)({
 });
 
 const TodoList = () => {
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.todo.todos);
   const dispatch = useDispatch();
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;

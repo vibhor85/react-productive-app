@@ -12,10 +12,9 @@ import { useSelector } from "react-redux";
 import BasicModal from "./Modal";
 
 const Sidebar = ({ date, show }) => {
-  const schdules = useSelector((state) => state.schedules);
+  const schdules = useSelector((state) => state.schedule.schedules);
   return (
     <Box display={show ? "block" : "none"} sx={{ width: "25%" }} p={2}>
-
       <BasicModal />
       <List>
         {schdules.map((schedule) => (
