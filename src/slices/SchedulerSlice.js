@@ -1,24 +1,19 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-  schedules: [
-    {
-      id: nanoid(),
-      date: "",
-      time: "",
-      title: "",
-      discription: "",
-      link: "",
-    },
-  ],
+  schedules: [],
 };
 
 const ScheduleSlice = createSlice({
   name: "schedule",
   initialState,
   reducers: {
-    addSchedule: () => {},
-    removeSchedule: () => {},
+    addSchedule: (state, action) => {
+      const schedule = { ...action.payload, id: nanoid() };
+      state.schedules.push(schedule);
+      console.log(schedule);
+    },
+    removeSchedule: (state, action) => {},
   },
 });
 

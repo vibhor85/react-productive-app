@@ -6,6 +6,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -13,25 +14,37 @@ import BasicModal from "./Modal";
 
 const Sidebar = ({ date, show }) => {
   const schdules = useSelector((state) => state.schedule.schedules);
+  const particularDateSchdules = schdules.filter(
+    (sc) => sc.date === date.toString()
+  );
+
   return (
     <Box display={show ? "block" : "none"} sx={{ width: "25%" }} p={2}>
-      <BasicModal />
+      <BasicModal date={date} />
       <List>
-        {schdules.map((schedule) => (
-          <ListItem
-            key={schedule.id}
-            sx={{ border: "1px solid rgba(25, 118, 210, 0.5)" }}
-          >
-            <ListItemAvatar>
-              <CalendarToday color="primary" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Photos"
-              secondary="Jan 9, 2014"
-              color="primary"
-            />
-          </ListItem>
-        ))}
+        {particularDateSchdules.length > 0 &&
+          particularDateSchdules.map((schedule) => (
+            <ListItem
+              key={schedule.id}
+              sx={{
+                border: "1px solid rgba(25, 118, 210, 0.5)",
+                margin: "10px 0",
+              }}>
+              <ListItemAvatar>
+                <CalendarToday color='primary' />
+              </ListItemAvatar>
+              <ListItemText
+                primary={schedule.title}
+                secondary={`${schedule.startTime} - ${schedule.endTime}`}
+                color='primary'
+              />
+            </ListItem>
+          ))}
+        {particularDateSchdules.length === 0 && (
+          <Typography variant='h6' sx={{ textAlign: "center" }}>
+            No Events Schdeuled
+          </Typography>
+        )}
       </List>
     </Box>
   );
