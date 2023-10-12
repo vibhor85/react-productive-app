@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
-import BasicModal from "./Modal";
+import AddEventForm from "./AddEventForm";
 
 const Sidebar = ({ date, show }) => {
   const schdules = useSelector((state) => state.schedule.schedules);
@@ -20,7 +20,7 @@ const Sidebar = ({ date, show }) => {
 
   return (
     <Box display={show ? "block" : "none"} sx={{ width: "25%" }} p={2}>
-      <BasicModal date={date} />
+      <AddEventForm />
       <List>
         {particularDateSchdules.length > 0 &&
           particularDateSchdules.map((schedule) => (
@@ -29,6 +29,7 @@ const Sidebar = ({ date, show }) => {
               sx={{
                 border: "1px solid rgba(25, 118, 210, 0.5)",
                 margin: "10px 0",
+                cursor: "pointer",
               }}>
               <ListItemAvatar>
                 <CalendarToday color='primary' />
