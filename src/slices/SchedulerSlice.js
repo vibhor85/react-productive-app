@@ -1,7 +1,12 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-  schedules: [],
+  schedules: [
+    {
+      id: nanoid(),
+      date: "Sun Oct 15 2023 00:00:00 GMT+0530 (India Standard Time)",
+    },
+  ],
 };
 
 const ScheduleSlice = createSlice({
