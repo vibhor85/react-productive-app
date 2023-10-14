@@ -1,8 +1,8 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import BasicModal from "./Modal";
 import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { useRef, useState } from "react";
+import { addSchedule } from "../../slices/SchedulerSlice";
 
 const StyledTextField = styled(TextField)({
   width: "100%",
@@ -24,19 +24,23 @@ const style = {
   alignItems: "center",
 };
 
-const AddEventForm = ({}) => {
+const AddEventForm = ({ date, isOpen, onClose }) => {
   const form = useRef();
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [link, setLink] = useState("");
   const [endDate, setEndDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const dispatch = useDispatch();
 
   const addSchedulehandler = (e) => {
     e.preventDefault();
+    if (!title || !desc || !link || !startDate || !endDate) return;
     const schedule = {
       date: date.toString(),
-      title: e.target[0].value,
-      description: e.target[1].value,
-      link: e.target[2].value,
+      title: title,
+      description: desc,
+      link: link,
       startTime: startDate,
       endTime: endDate,
     };
@@ -44,36 +48,54 @@ const AddEventForm = ({}) => {
     form.current.reset();
     setStartDate("");
     setEndDate("");
+    onClose();
   };
   return (
-    <BasicModal>
-      <Box sx={style}>
-        <Typography varient='h4'>Add Event</Typography>
-        <form onSubmit={addSchedulehandler} ref={form}>
-          <StyledTextField type='text' label='Title' />
-          <StyledTextField typ e='text' label='Discription' multiline />
-          <StyledTextField type='link' label='link' />
-          <Typography varient='h4'>Start Time</Typography>
-          <StyledTextField
-            type='time'
-            onChange={(e) => setStartDate(e.target.value)}
-            value={startDate}
-          />
-          <Typography varient='h4'>End Time</Typography>
-          <StyledTextField
-            type='time'
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-          <Button type='submit' variant='outlined'>
-            Add Event
-          </Button>
-          <Button color='error' p={2} type='button' variant='outlined'>
-            cancel
-          </Button>
-        </form>
-      </Box>
-    </BasicModal>
+    <Box sx={style}>
+      <Typography varient="h4">Add Event</Typography>
+      <form onSubmit={addSchedulehandler} ref={form}>
+        <StyledTextField
+          type="text"
+          label="Title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <StyledTextField
+          type="text"
+          label="Discription"
+          multiline
+          onChange={(e) => setDesc(e.target.value)}
+        />
+        <StyledTextField
+          type="text"
+          label="link"
+          onChange={(e) => setLink(e.target.value)}
+        />
+        <Typography varient="h4">Start Time</Typography>
+        <StyledTextField
+          type="time"
+          onChange={(e) => setStartDate(e.target.value)}
+          value={startDate}
+        />
+        <Typography varient="h4">End Time</Typography>
+        <StyledTextField
+          type="time"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
+        <Button type="submit" variant="outlined" sx={{ margin: "0 10px" }}>
+          Add Event
+        </Button>
+        <Button
+          color="error"
+          p={2}
+          type="button"
+          variant="outlined"
+          onClick={onClose}
+        >
+          Cancel
+        </Button>
+      </form>
+    </Box>
   );
 };
 export default AddEventForm;
