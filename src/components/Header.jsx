@@ -18,9 +18,9 @@ const StyledMenuItem = styled(MenuItem)({
 
 const Header = () => {
   const NavItems = [
-    { text: "To-do", path: "/" },
+    { text: "To-do", path: "/todo" },
     { text: "Calender", path: "/calender" },
-    { text: "Dashboard", path: "/dashboard" },
+    { text: "Dashboard", path: "/" },
   ];
 
   return (

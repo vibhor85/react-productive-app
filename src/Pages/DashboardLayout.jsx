@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   return (
     <div style={style}>
       <LeftSidebar />
-      <div>
+      <div style={{ width: "100%", padding: "40px 20px" }}>
         <Outlet />
       </div>
     </div>

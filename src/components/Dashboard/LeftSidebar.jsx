@@ -1,24 +1,52 @@
-import { Box, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import AppsIcon from "@mui/icons-material/Apps";
+import PersonIcon from "@mui/icons-material/Person";
+import styled from "@emotion/styled";
+
+const StyledListItemText = styled(ListItemText)({
+  color: "black",
+});
 
 const LeftSidebar = () => {
   return (
     <Box
-      sx={{ width: "25%", borderRight: "1px solid #1976d2", height: "86.4vh" }}
+      sx={{
+        width: "25%",
+        height: "86.4vh",
+        boxShadow: "10px 0px 15px rgba(0,0,0,0.1)",
+      }}
       p={2}
     >
       <List>
-        <ListItem>
-          <NavLink to="">
-            <ListItemText primary="Apps" />
-          </NavLink>
-        </ListItem>
-        <ListItem>
-          <NavLink to="User">
-            <ListItemText primary="User" />
-          </NavLink>
-        </ListItem>
+        <NavLink to="" style={{ textDecoration: "none" }}>
+          <ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <AppsIcon />
+              </ListItemIcon>
+              <StyledListItemText primary="Apps" />
+            </ListItem>
+          </ListItemButton>
+        </NavLink>
+        <NavLink to="User" style={{ textDecoration: "none" }}>
+          <ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <StyledListItemText primary="User" />
+            </ListItem>
+          </ListItemButton>
+        </NavLink>
       </List>
     </Box>
   );
