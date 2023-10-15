@@ -7,6 +7,7 @@ import {
   Modal,
 } from "@mui/material";
 import { useState } from "react";
+import ItemContent from "./ItemContent";
 
 const style = {
   position: "absolute",
@@ -53,7 +54,9 @@ const ScheduleItem = ({ schedule }) => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>Content</Box>
+          <Box sx={style}>
+            <ItemContent schedule={schedule} />
+          </Box>
         </Modal>
       </Box>
     </Box>
