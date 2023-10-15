@@ -20,18 +20,20 @@ const Header = () => {
   const NavItems = [
     { text: "To-do", path: "/" },
     { text: "Calender", path: "/calender" },
+    { text: "Dashboard", path: "/dashboard" },
   ];
 
   return (
-    <AppBar position='static'>
+    <AppBar position="static">
       <Toolbar>
         <Stack
-          width='100%'
-          justifyContent='space-between'
-          alignItems='center'
-          direction='row'>
+          width="100%"
+          justifyContent="space-between"
+          alignItems="center"
+          direction="row"
+        >
           <Typography
-            varient='h1'
+            varient="h1"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -40,16 +42,18 @@ const Header = () => {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-            }}>
+            }}
+          >
             LOGO
           </Typography>
           <MenuList>
-            <Stack direction='row'>
+            <Stack direction="row">
               {NavItems.map((item, index) => (
                 <StyledMenuItem key={index}>
                   <NavLink
                     to={item.path}
-                    style={{ color: "white", textDecoration: "none" }}>
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
                     {item.text}
                   </NavLink>
                 </StyledMenuItem>
