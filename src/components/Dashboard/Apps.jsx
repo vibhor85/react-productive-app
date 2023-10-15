@@ -23,7 +23,7 @@ const Apps = () => {
           <CardMedia
             sx={{ height: 200 }}
             image="https://clickup.com/blog/wp-content/uploads/2019/01/to-do-list-apps.png"
-            title="green iguana"
+            title="Todo"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -37,7 +37,7 @@ const Apps = () => {
           <CardMedia
             sx={{ height: 200 }}
             image="https://media.coschedule.com/uploads/2021/08/Blog_How-To-Create-An-Content-Marketing-Editorial-Calendar-In-2023_Header-copy.png"
-            title="green iguana"
+            title="Calendar"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
